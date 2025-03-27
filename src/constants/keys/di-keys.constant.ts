@@ -1,0 +1,5 @@
+export abstract class DiKeysConstant {
+	static readonly DI_DATABASE_MODULE = 'DI_DATABASE_MODULE';
+	static readonly DI_S3_STORAGE_MODULE_OPTIONS = 'DI_S3_STORAGE_MODULE_OPTIONS';
+	static readonly DI_FIREBASE_MODULE_OPTIONS = 'DI_FIREBASE_MODULE_OPTIONS';
+}

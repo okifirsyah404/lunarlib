@@ -1,0 +1,2384 @@
+{
+	"info": {
+		"_postman_id": "1b5c7a0c-500e-4d1c-8080-4def2572841a",
+		"name": "Lunarlib",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21192904",
+		"_collection_link": "https://orange-desert-68437.postman.co/workspace/TEFA-NCC~830556ac-5484-4eaa-af1d-cec6a9ceabd6/collection/21192904-1b5c7a0c-500e-4d1c-8080-4def2572841a?action=share&source=collection_link&creator=21192904"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign In",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body as JSON\r",
+									"let responseData = pm.response.json();\r",
+									"\r",
+									"// Check if data[0].id exists before setting the variable\r",
+									"if (responseData.data) {\r",
+									"    let token = responseData.data.accessToken;\r",
+									"    \r",
+									"    // Set the extracted id as a collection variable\r",
+									"    pm.collectionVariables.set(\"ACCESS_TOKEN\", token);\r",
+									"    \r",
+									"    // Log for debugging\r",
+									"    console.log(\"Extracted ID:\", token);\r",
+									"} else {\r",
+									"    console.log(\"ID not found in response.\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@lunarlib.com\",\r\n    \"password\": \"admin@lunarlib.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auths/sign-in",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auths",
+								"sign-in"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@lunarlib.com\",\r\n    \"password\": \"admin@lunarlib.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auths/sign-in",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auths",
+										"sign-in"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "339"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"153-SvRbfS62eUUoHf9i0KcpWdm8+tk\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:16:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743048997523,\n    \"message\": \"Sign in successfully\",\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkMzYzNmE0Mi01YTdkLTRjNzktODk2OS1mYTU5MDhiOWY1MjUiLCJ1c2VybmFtZSI6IkBhZG1pbiIsImVtYWlsIjoiYWRtaW5AbHVuYXJsaWIuY29tIiwiaWF0IjoxNzQzMDQ4OTk3LCJleHAiOjE3NDMxMzUzOTd9.n-LDz5TnS4qpo6T2D3rq1QhX1hMnD83Y4qBpov8fKF4\"\n    }\n}"
+						},
+						{
+							"name": "Wrong Credential",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin1@lunarlib.com\",\r\n    \"password\": \"admin@lunarlib.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auths/sign-in",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auths",
+										"sign-in"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"39-YaDc0p9jOZlP99YCn+vo0XtdIHI\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:16:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049011385,\n    \"message\": \"Account not found\"\n}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"adminlunarlib.com\",\r\n    \"password\": \"admin@lunarlib.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auths/sign-in",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auths",
+										"sign-in"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-9d2mwU/jy3IgIzo4PO9hHcSGVY0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:17:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049053564,\n    \"message\": \"email must be an email\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Sign Up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body as JSON\r",
+									"let responseData = pm.response.json();\r",
+									"\r",
+									"// Check if data[0].id exists before setting the variable\r",
+									"if (responseData.data) {\r",
+									"    let token = responseData.data.accessToken;\r",
+									"    \r",
+									"    // Set the extracted id as a collection variable\r",
+									"    pm.collectionVariables.set(\"ACCESS_TOKEN\", token);\r",
+									"    \r",
+									"    // Log for debugging\r",
+									"    console.log(\"Extracted ID:\", token);\r",
+									"} else {\r",
+									"    console.log(\"ID not found in response.\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"testuser1@lunarlib.com\",\r\n    \"password\": \"testuser1@lunarlib.com\",\r\n    \"username\": \"@testuser1\",\r\n    \"name\": \"Dev Test User\",\r\n    \"bio\": \"Test bio\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auths/sign-up",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auths",
+								"sign-up"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"testuser1@lunarlib.com\",\r\n    \"password\": \"testuser1@lunarlib.com\",\r\n    \"username\": \"@testuser1\",\r\n    \"name\": \"Dev Test User\",\r\n    \"bio\": \"Test bio\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auths/sign-up",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auths",
+										"sign-up"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "350"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"15e-cBA52bPHRsEgzayRSb0I0FANTeI\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:18:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049108308,\n    \"message\": \"Sign up successfully\",\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNjRlZTdmMi05NjM5LTRmYTYtYTY1Yy0xZTJjMTI4YjE2ZTUiLCJ1c2VybmFtZSI6IkB0ZXN0dXNlcjEiLCJlbWFpbCI6InRlc3R1c2VyMUBsdW5hcmxpYi5jb20iLCJpYXQiOjE3NDMwNDkxMDgsImV4cCI6MTc0MzEzNTUwOH0.l98dfamdjKO9rA6gZP76QWsnSSuF3RyA63BCbuqMIsI\"\n    }\n}"
+						},
+						{
+							"name": "Conflict Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"testuser1@lunarlib.com\",\r\n    \"password\": \"testuser1@lunarlib.com\",\r\n    \"username\": \"@testuser1\",\r\n    \"name\": \"Dev Test User\",\r\n    \"bio\": \"Test bio\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auths/sign-up",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auths",
+										"sign-up"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-9KW/EA++M+zPQpjZCJekcdzSF38\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:18:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049117615,\n    \"message\": \"Account already exists\"\n}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"testuser1lunarlib.com\",\r\n    \"password\": \"testuser1@lunarlib.com\",\r\n    \"username\": \"@testuser1\",\r\n    \"name\": \"Dev Test User\",\r\n    \"bio\": \"Test bio\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auths/sign-up",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auths",
+										"sign-up"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-MfkufZ28xQ/yT5SElNouuCicxLQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:18:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049131090,\n    \"message\": \"email must be an email\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Posts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body as JSON\r",
+									"let responseData = pm.response.json();\r",
+									"\r",
+									"// Check if data[0].id exists before setting the variable\r",
+									"if (responseData.data && responseData.data.length > 0 && responseData.data[0].id) {\r",
+									"    let extractedId = responseData.data[0].id;\r",
+									"    \r",
+									"    // Set the extracted id as a collection variable\r",
+									"    pm.collectionVariables.set(\"POST_ID\", extractedId);\r",
+									"    \r",
+									"    // Log for debugging\r",
+									"    console.log(\"Extracted ID:\", extractedId);\r",
+									"} else {\r",
+									"    console.log(\"ID not found in response.\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/posts?page=1&limit&search=Member1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": null
+								},
+								{
+									"key": "search",
+									"value": "Member1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/posts?page=1&limit&search=",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": null
+										},
+										{
+											"key": "search",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "11660"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d8c-5LyCpoPn/5ZpvYF2m1DPMxOgm4g\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:19:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Retrieve posts successfully\",\n    \"timestamp\": 1743049153964,\n    \"pagination\": {\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 59,\n        \"totalPages\": 6\n    },\n    \"data\": [\n        {\n            \"id\": \"5fe79dfc-8ab6-4dfb-9531-25ed10263d29\",\n            \"createdAt\": 1743046755312,\n            \"updatedAt\": 1743046765676,\n            \"content\": \"Sample post content\",\n            \"price\": 5000,\n            \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/posts/5fe79dfc-8ab6-4dfb-9531-25ed10263d29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=a539fcb580aee3f422e8dadaca9bba6f8050e40b4582a8471fd3d85263c81a1f&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n            \"user\": {\n                \"id\": \"3e2152ab-93d0-478d-af5f-69795a723569\",\n                \"username\": \"@member4\",\n                \"profile\": {\n                    \"id\": \"6fa9d0f9-eb72-436f-a422-9f8a887ff191\",\n                    \"name\": \"Naomi Pfeffer\",\n                    \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/3e2152ab-93d0-478d-af5f-69795a723569.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=7b89f1d72038ee0d5972ef4e4ebe88359797f444b408f905017872484ff7b036&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                    \"bio\": \"inventor\"\n                }\n            },\n            \"book\": {\n                \"id\": \"9de14281-acf7-4287-848e-9abd73e76d4a\",\n                \"title\": \"Sample Book Title\",\n                \"author\": \"John Doe\"\n            }\n        },\n        {\n            \"id\": \"a6d07c36-2523-4407-b602-7cd8d5a7e045\",\n            \"createdAt\": 1743046652136,\n            \"updatedAt\": 1743046655140,\n            \"content\": \"Sample post content\",\n            \"price\": 5000,\n            \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/posts/a6d07c36-2523-4407-b602-7cd8d5a7e045.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=3f65d227078af39ba58552bdd6221c056fdbcb974b38300f82287f1c1c4574da&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n            \"user\": {\n                \"id\": \"3e2152ab-93d0-478d-af5f-69795a723569\",\n                \"username\": \"@member4\",\n                \"profile\": {\n                    \"id\": \"6fa9d0f9-eb72-436f-a422-9f8a887ff191\",\n                    \"name\": \"Naomi Pfeffer\",\n                    \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/3e2152ab-93d0-478d-af5f-69795a723569.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=7b89f1d72038ee0d5972ef4e4ebe88359797f444b408f905017872484ff7b036&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                    \"bio\": \"inventor\"\n                }\n            },\n            \"book\": {\n                \"id\": \"1be8f298-b888-4645-aec5-4c90faa3d14d\",\n                \"title\": \"Sample Book Title\",\n                \"author\": \"John Doe\"\n            }\n        },\n        {\n            \"id\": \"aef59754-f6d1-40f6-b630-bcae98c44964\",\n            \"createdAt\": 1743046578268,\n            \"updatedAt\": 1743046582088,\n            \"content\": \"Sample post content\",\n            \"price\": 5000,\n            \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/posts/aef59754-f6d1-40f6-b630-bcae98c44964.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=f158110dd1562ea2c7e5734d8b16a798180a496a660619073e76494293e34fe4&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n            \"user\": {\n                \"id\": \"3e2152ab-93d0-478d-af5f-69795a723569\",\n                \"username\": \"@member4\",\n                \"profile\": {\n                    \"id\": \"6fa9d0f9-eb72-436f-a422-9f8a887ff191\",\n                    \"name\": \"Naomi Pfeffer\",\n                    \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/3e2152ab-93d0-478d-af5f-69795a723569.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=7b89f1d72038ee0d5972ef4e4ebe88359797f444b408f905017872484ff7b036&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                    \"bio\": \"inventor\"\n                }\n            },\n            \"book\": {\n                \"id\": \"71812b8b-e79e-4620-8e15-b9015ff9e482\",\n                \"title\": \"Sample Book Title\",\n                \"author\": \"John Doe\"\n            }\n        },\n        {\n            \"id\": \"6267cadb-1fc7-4757-9f10-9d2c6cd4eefe\",\n            \"createdAt\": 1743046507998,\n            \"updatedAt\": 1743046512312,\n            \"content\": \"Sample post content\",\n            \"price\": 5000,\n            \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/posts/6267cadb-1fc7-4757-9f10-9d2c6cd4eefe.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=cb2a49ccdbc670fc0c26a67aa264f8b355fc2e52831044b8c1f4c167949778b2&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n            \"user\": {\n                \"id\": \"3e2152ab-93d0-478d-af5f-69795a723569\",\n                \"username\": \"@member4\",\n                \"profile\": {\n                    \"id\": \"6fa9d0f9-eb72-436f-a422-9f8a887ff191\",\n                    \"name\": \"Naomi Pfeffer\",\n                    \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/3e2152ab-93d0-478d-af5f-69795a723569.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=7b89f1d72038ee0d5972ef4e4ebe88359797f444b408f905017872484ff7b036&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                    \"bio\": \"inventor\"\n                }\n            },\n            \"book\": {\n                \"id\": \"b6111d67-fbb5-49ca-a71a-9b01a898759e\",\n                \"title\": \"Sample Book Title\",\n                \"author\": \"John Doe\"\n            }\n        },\n        {\n            \"id\": \"eded58a7-a6f1-4018-ab33-aadf9484f4af\",\n            \"createdAt\": 1743026923824,\n            \"updatedAt\": 1743026947118,\n            \"content\": \"Sample post content\",\n            \"price\": 5000,\n            \"image\": null,\n            \"user\": {\n                \"id\": \"d3636a42-5a7d-4c79-8969-fa5908b9f525\",\n                \"username\": \"@admin\",\n                \"profile\": {\n                    \"id\": \"1b47d1ed-41aa-4ee4-b976-26e5b33339b1\",\n                    \"name\": \"Leslie Blanda\",\n                    \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/d3636a42-5a7d-4c79-8969-fa5908b9f525.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=fc90d04a48f8436a0004dad255d92b2aac5e35a8ea432a97ece64f8d1f1b2ff4&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                    \"bio\": \"space junkie  🇧🇬\"\n                }\n            },\n            \"book\": {\n                \"id\": \"0dcaf39a-9742-42b9-a0cf-62ee143b4254\",\n                \"title\": \"Sample Book Title\",\n                \"author\": \"John Doe\"\n            }\n        },\n        {\n            \"id\": \"8f5f9d36-3549-4cee-bb75-f43793744b96\",\n            \"createdAt\": 1743026853948,\n            \"updatedAt\": 1743026853948,\n            \"content\": \"Sample post content\",\n            \"price\": 5000,\n            \"image\": null,\n            \"user\": {\n                \"id\": \"d3636a42-5a7d-4c79-8969-fa5908b9f525\",\n                \"username\": \"@admin\",\n                \"profile\": {\n                    \"id\": \"1b47d1ed-41aa-4ee4-b976-26e5b33339b1\",\n                    \"name\": \"Leslie Blanda\",\n                    \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/d3636a42-5a7d-4c79-8969-fa5908b9f525.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=fc90d04a48f8436a0004dad255d92b2aac5e35a8ea432a97ece64f8d1f1b2ff4&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                    \"bio\": \"space junkie  🇧🇬\"\n                }\n            },\n            \"book\": {\n                \"id\": \"8947a18f-7710-42af-8859-ad541af9937d\",\n                \"title\": \"Sample Book Title\",\n                \"author\": \"John Doe\"\n            }\n        },\n        {\n            \"id\": \"31fd8a62-ad1d-45af-8ab0-5cef8b100589\",\n            \"createdAt\": 1743026487281,\n            \"updatedAt\": 1743026487281,\n            \"content\": \"Sample post content\",\n            \"price\": 5000,\n            \"image\": null,\n            \"user\": {\n                \"id\": \"3e2152ab-93d0-478d-af5f-69795a723569\",\n                \"username\": \"@member4\",\n                \"profile\": {\n                    \"id\": \"6fa9d0f9-eb72-436f-a422-9f8a887ff191\",\n                    \"name\": \"Naomi Pfeffer\",\n                    \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/3e2152ab-93d0-478d-af5f-69795a723569.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=7b89f1d72038ee0d5972ef4e4ebe88359797f444b408f905017872484ff7b036&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                    \"bio\": \"inventor\"\n                }\n            },\n            \"book\": {\n                \"id\": \"be736d5d-cb4e-4182-979f-d3e65d2f050f\",\n                \"title\": \"Sample Book Title\",\n                \"author\": \"John Doe\"\n            }\n        },\n        {\n            \"id\": \"a41fd1a5-f079-4208-9d61-77904301e38e\",\n            \"createdAt\": 1743026174873,\n            \"updatedAt\": 1743026174873,\n            \"content\": \"Sample post content\",\n            \"price\": 5000,\n            \"image\": null,\n            \"user\": {\n                \"id\": \"3e2152ab-93d0-478d-af5f-69795a723569\",\n                \"username\": \"@member4\",\n                \"profile\": {\n                    \"id\": \"6fa9d0f9-eb72-436f-a422-9f8a887ff191\",\n                    \"name\": \"Naomi Pfeffer\",\n                    \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/3e2152ab-93d0-478d-af5f-69795a723569.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=7b89f1d72038ee0d5972ef4e4ebe88359797f444b408f905017872484ff7b036&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                    \"bio\": \"inventor\"\n                }\n            },\n            \"book\": {\n                \"id\": \"58a84c6c-5840-4239-bd27-f826043740c1\",\n                \"title\": \"Sample Book Title\",\n                \"author\": \"John Doe\"\n            }\n        },\n        {\n            \"id\": \"2d95e468-d079-456c-9fdb-d2474b128483\",\n            \"createdAt\": 1743025828470,\n            \"updatedAt\": 1743025828470,\n            \"content\": \"Sample post content\",\n            \"price\": 5000,\n            \"image\": null,\n            \"user\": {\n                \"id\": \"3e2152ab-93d0-478d-af5f-69795a723569\",\n                \"username\": \"@member4\",\n                \"profile\": {\n                    \"id\": \"6fa9d0f9-eb72-436f-a422-9f8a887ff191\",\n                    \"name\": \"Naomi Pfeffer\",\n                    \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/3e2152ab-93d0-478d-af5f-69795a723569.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=7b89f1d72038ee0d5972ef4e4ebe88359797f444b408f905017872484ff7b036&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                    \"bio\": \"inventor\"\n                }\n            },\n            \"book\": {\n                \"id\": \"e6d05531-04cd-4f8c-98ac-7f0b13c45d2a\",\n                \"title\": \"Sample Book Title\",\n                \"author\": \"John Doe\"\n            }\n        },\n        {\n            \"id\": \"05500115-f8f2-449c-883d-24d472b8c2a9\",\n            \"createdAt\": 1743025703309,\n            \"updatedAt\": 1743025703309,\n            \"content\": \"Currus surculus verumtamen vesper textor. Triduana defaeco sum spiculum demitto culpa admiratio cruentus articulus suasoria. Arbustum cuppedia succurro fuga tenax.\\nBeatae aliqua timor delinquo basium degusto virgo tribuo. Cimentarius sol totidem tremo odit addo bellicus. Theologus defaeco amissio cattus urbanus crudelis.\\nPax commodi laborum sustineo ater cultellus defungo considero talis abscido. Ter auditor abeo temptatio aequitas. Cimentarius utrum sto ulciscor accedo eaque depono spes.\",\n            \"price\": 848500,\n            \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/posts/05500115-f8f2-449c-883d-24d472b8c2a9.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=c0bc9751c4a783261122b522610e5d80224ce14a080b235b4f8680d1961cfb56&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n            \"user\": {\n                \"id\": \"a961c73f-7dce-43b9-9d00-c524944b6e87\",\n                \"username\": \"@member1\",\n                \"profile\": {\n                    \"id\": \"fd4ba42e-0311-49aa-a8a8-31a82ea53496\",\n                    \"name\": \"Maurice Lowe-Beatty\",\n                    \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/a961c73f-7dce-43b9-9d00-c524944b6e87.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T041913Z&X-Amz-Expires=7200&X-Amz-Signature=4896fa7d022426c2a61796234f87fe9e6ae7bd56dd851aa2c7e9eb682a89d76f&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                    \"bio\": \"dreamer\"\n                }\n            },\n            \"book\": {\n                \"id\": \"af9e00b9-876d-41fc-b490-3ef392586c48\",\n                \"title\": \"Great Expectations\",\n                \"author\": \"Bernard Sauer\"\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "Unauthorize",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/posts?page=1&limit&search=",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": null
+										},
+										{
+											"key": "search",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41-FIdqrJX8ppRDdbrF8lt5H+mJzCY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:19:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049177192,\n    \"message\": \"Unauthorized access token\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Post Detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body as JSON\r",
+									"let responseData = pm.response.json();\r",
+									"\r",
+									"// Check if data[0].id exists before setting the variable\r",
+									"if (responseData.data) {\r",
+									"    let extractedId = responseData.data.id;\r",
+									"    \r",
+									"    // Set the extracted id as a collection variable\r",
+									"    pm.collectionVariables.set(\"POST_ID\", extractedId);\r",
+									"    \r",
+									"    // Log for debugging\r",
+									"    console.log(\"Extracted ID:\", extractedId);\r",
+									"} else {\r",
+									"    console.log(\"ID not found in response.\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/posts/{{POST_ID}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"posts",
+								"{{POST_ID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/posts/{{POST_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										"{{POST_ID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1923"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"783-xiwxCiqa5aE2IFO5LHEITK6FAc4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:20:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049220134,\n    \"message\": \"Retrieve post successfully\",\n    \"data\": {\n        \"id\": \"5fe79dfc-8ab6-4dfb-9531-25ed10263d29\",\n        \"createdAt\": 1743046755312,\n        \"updatedAt\": 1743046765676,\n        \"deletedAt\": null,\n        \"content\": \"Sample post content\",\n        \"price\": 5000,\n        \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/posts/5fe79dfc-8ab6-4dfb-9531-25ed10263d29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T033924Z&X-Amz-Expires=7200&X-Amz-Signature=fd159a1a839c0b835e49bbdf5ded172ff43c31a5103b54d4ea4cbcf5881dd9bf&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n        \"userId\": \"3e2152ab-93d0-478d-af5f-69795a723569\",\n        \"user\": {\n            \"id\": \"3e2152ab-93d0-478d-af5f-69795a723569\",\n            \"createdAt\": 1743025700249,\n            \"updatedAt\": 1743025700249,\n            \"deletedAt\": null,\n            \"username\": \"@member4\",\n            \"accountId\": \"0dc55a03-6855-4270-a6d1-2de52a2f3550\",\n            \"profileId\": \"6fa9d0f9-eb72-436f-a422-9f8a887ff191\",\n            \"profile\": {\n                \"id\": \"6fa9d0f9-eb72-436f-a422-9f8a887ff191\",\n                \"createdAt\": 1743025700249,\n                \"updatedAt\": 1743025700249,\n                \"deletedAt\": null,\n                \"name\": \"Naomi Pfeffer\",\n                \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/3e2152ab-93d0-478d-af5f-69795a723569.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T033914Z&X-Amz-Expires=7200&X-Amz-Signature=f7f2640572e07f019419978c080acfd2172c970d27100511a8cab007c8a6833f&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                \"bio\": \"inventor\"\n            }\n        },\n        \"book\": {\n            \"id\": \"9de14281-acf7-4287-848e-9abd73e76d4a\",\n            \"createdAt\": 1743046755312,\n            \"updatedAt\": 1743046755312,\n            \"deletedAt\": null,\n            \"title\": \"Sample Book Title\",\n            \"author\": \"John Doe\",\n            \"publisher\": \"Sample Publisher\",\n            \"publishYear\": 1640970000000,\n            \"isbn\": \"978-3-16-148410-0\",\n            \"language\": \"English\",\n            \"postId\": \"5fe79dfc-8ab6-4dfb-9531-25ed10263d29\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Unauthorize",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/posts/{{POST_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										"{{POST_ID}}"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41-WfiuN09N4L7ynhnBGEMJl9CnIog\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:21:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049288737,\n    \"message\": \"Unauthorized access token\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body as JSON\r",
+									"let responseData = pm.response.json();\r",
+									"\r",
+									"// Check if data[0].id exists before setting the variable\r",
+									"if (responseData.data) {\r",
+									"    let extractedId = responseData.data.id;\r",
+									"    \r",
+									"    // Set the extracted id as a collection variable\r",
+									"    pm.collectionVariables.set(\"POST_ID\", extractedId);\r",
+									"    \r",
+									"    // Log for debugging\r",
+									"    console.log(\"Extracted ID:\", extractedId);\r",
+									"} else {\r",
+									"    console.log(\"ID not found in response.\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"postContent\": \"Sample post content\",\r\n  \"postPrice\": 5000,\r\n  \"bookTitle\": \"Sample Book Title\",\r\n  \"bookAuthor\": \"John Doe\",\r\n  \"bookISBN\": \"978-3-16-148410-0\",\r\n  \"bookLanguage\": \"English\",\r\n  \"bookPublishYear\": \"2022\",\r\n  \"bookPublisher\": \"Sample Publisher\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/posts",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"postContent\": \"Sample post content\",\r\n  \"postPrice\": 5000,\r\n  \"bookTitle\": \"Sample Book Title\",\r\n  \"bookAuthor\": \"John Doe\",\r\n  \"bookISBN\": \"978-3-16-148410-0\",\r\n  \"bookLanguage\": \"English\",\r\n  \"bookPublishYear\": \"2022\",\r\n  \"bookPublisher\": \"Sample Publisher\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/posts",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1493"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5d5-TAxaNgLSGBLZ1TG6b+a6nq4efnk\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:20:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049229293,\n    \"message\": \"Create post successfully\",\n    \"data\": {\n        \"id\": \"ed894cc2-4592-4c1b-bca1-0f41016395a6\",\n        \"createdAt\": 1743049230228,\n        \"updatedAt\": 1743049230228,\n        \"deletedAt\": null,\n        \"content\": \"Sample post content\",\n        \"price\": 5000,\n        \"image\": null,\n        \"userId\": \"d3636a42-5a7d-4c79-8969-fa5908b9f525\",\n        \"user\": {\n            \"id\": \"d3636a42-5a7d-4c79-8969-fa5908b9f525\",\n            \"createdAt\": 1743025700249,\n            \"updatedAt\": 1743025700249,\n            \"deletedAt\": null,\n            \"username\": \"@admin\",\n            \"accountId\": \"ef263a46-02c6-47fa-8cb0-af331a8914cf\",\n            \"profileId\": \"1b47d1ed-41aa-4ee4-b976-26e5b33339b1\",\n            \"profile\": {\n                \"id\": \"1b47d1ed-41aa-4ee4-b976-26e5b33339b1\",\n                \"createdAt\": 1743025700249,\n                \"updatedAt\": 1743025700249,\n                \"deletedAt\": null,\n                \"name\": \"Leslie Blanda\",\n                \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/d3636a42-5a7d-4c79-8969-fa5908b9f525.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T042029Z&X-Amz-Expires=7200&X-Amz-Signature=8004963d9c182a5f76bb8dfc2cdea6706db8060be6ce9121cd20f232d05c58d5&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                \"bio\": \"space junkie  🇧🇬\"\n            }\n        },\n        \"book\": {\n            \"id\": \"ae39dc63-7277-4690-85d5-19d6a4197ed2\",\n            \"createdAt\": 1743049230228,\n            \"updatedAt\": 1743049230228,\n            \"deletedAt\": null,\n            \"title\": \"Sample Book Title\",\n            \"author\": \"John Doe\",\n            \"publisher\": \"Sample Publisher\",\n            \"publishYear\": 1640970000000,\n            \"isbn\": \"978-3-16-148410-0\",\n            \"language\": \"English\",\n            \"postId\": \"ed894cc2-4592-4c1b-bca1-0f41016395a6\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Unauthorize",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"postContent\": \"Sample post content\",\r\n  \"postPrice\": 5000,\r\n  \"bookTitle\": \"Sample Book Title\",\r\n  \"bookAuthor\": \"John Doe\",\r\n  \"bookISBN\": \"978-3-16-148410-0\",\r\n  \"bookLanguage\": \"English\",\r\n  \"bookPublishYear\": \"2022\",\r\n  \"bookPublisher\": \"Sample Publisher\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/posts",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41-LdHfZz6j7E1HLWjctJ2j+/s3zlY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:21:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049304257,\n    \"message\": \"Unauthorized access token\"\n}"
+						},
+						{
+							"name": "Unauthorize Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"postContent\": \"Sample post content\",\r\n  \"postPrice\": 5000,\r\n  \"bookTitle\": \"Sample Book Title\",\r\n  \"bookAuthor\": \"John Doe\",\r\n  \"bookISBN\": \"978-3-16-148410-0\",\r\n  \"bookLanguage\": \"English\",\r\n  \"bookPublishYear\": \"2022\",\r\n  \"bookPublisher\": \"Sample Publisher\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/posts",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "91"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5b-v5iV9qwSkDP4EppaznFmYgJsVu4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:22:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049369948,\n    \"message\": \"You did not have permission to access this resource\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Upload Post Image",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body as JSON\r",
+									"let responseData = pm.response.json();\r",
+									"\r",
+									"// Check if data[0].id exists before setting the variable\r",
+									"if (responseData.data) {\r",
+									"    let extractedId = responseData.data.id;\r",
+									"    \r",
+									"    // Set the extracted id as a collection variable\r",
+									"    pm.collectionVariables.set(\"POST_ID\", extractedId);\r",
+									"    \r",
+									"    // Log for debugging\r",
+									"    console.log(\"Extracted ID:\", extractedId);\r",
+									"} else {\r",
+									"    console.log(\"ID not found in response.\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eecc5da-27d0-4070-99d5-621d7199f8f0"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/posts/{{POST_ID}}/uploads",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"posts",
+								"{{POST_ID}}",
+								"uploads"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "postman-cloud:///1eecc5da-27d0-4070-99d5-621d7199f8f0"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/posts/{{POST_ID}}/uploads",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										"{{POST_ID}}",
+										"uploads"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1939"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"793-yzCJO0to+UAK8K1fNMvTJdHWxW4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:20:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049238703,\n    \"message\": \"Upload post image successfully\",\n    \"data\": {\n        \"id\": \"ed894cc2-4592-4c1b-bca1-0f41016395a6\",\n        \"createdAt\": 1743049230228,\n        \"updatedAt\": 1743049239730,\n        \"deletedAt\": null,\n        \"content\": \"Sample post content\",\n        \"price\": 5000,\n        \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/posts/ed894cc2-4592-4c1b-bca1-0f41016395a6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T042038Z&X-Amz-Expires=7200&X-Amz-Signature=3c690a0a7d8f0b89644ba29fd27aed5c166874382a8d5c8ce1d69fe9a5752401&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n        \"userId\": \"d3636a42-5a7d-4c79-8969-fa5908b9f525\",\n        \"user\": {\n            \"id\": \"d3636a42-5a7d-4c79-8969-fa5908b9f525\",\n            \"createdAt\": 1743025700249,\n            \"updatedAt\": 1743025700249,\n            \"deletedAt\": null,\n            \"username\": \"@admin\",\n            \"accountId\": \"ef263a46-02c6-47fa-8cb0-af331a8914cf\",\n            \"profileId\": \"1b47d1ed-41aa-4ee4-b976-26e5b33339b1\",\n            \"profile\": {\n                \"id\": \"1b47d1ed-41aa-4ee4-b976-26e5b33339b1\",\n                \"createdAt\": 1743025700249,\n                \"updatedAt\": 1743025700249,\n                \"deletedAt\": null,\n                \"name\": \"Leslie Blanda\",\n                \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/d3636a42-5a7d-4c79-8969-fa5908b9f525.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T042029Z&X-Amz-Expires=7200&X-Amz-Signature=8004963d9c182a5f76bb8dfc2cdea6706db8060be6ce9121cd20f232d05c58d5&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                \"bio\": \"space junkie  🇧🇬\"\n            }\n        },\n        \"book\": {\n            \"id\": \"ae39dc63-7277-4690-85d5-19d6a4197ed2\",\n            \"createdAt\": 1743049230228,\n            \"updatedAt\": 1743049230228,\n            \"deletedAt\": null,\n            \"title\": \"Sample Book Title\",\n            \"author\": \"John Doe\",\n            \"publisher\": \"Sample Publisher\",\n            \"publishYear\": 1640970000000,\n            \"isbn\": \"978-3-16-148410-0\",\n            \"language\": \"English\",\n            \"postId\": \"ed894cc2-4592-4c1b-bca1-0f41016395a6\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Already has image",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "postman-cloud:///1eecc5da-27d0-4070-99d5-621d7199f8f0"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/posts/{{POST_ID}}/uploads",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										"{{POST_ID}}",
+										"uploads"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41-VwMY+RPi9gVsZMbvL5Zx98GzBcE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:20:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049247155,\n    \"message\": \"Post already has an image\"\n}"
+						},
+						{
+							"name": "Unauthorize",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "postman-cloud:///1eecc5da-27d0-4070-99d5-621d7199f8f0"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/posts/{{POST_ID}}/uploads",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										"{{POST_ID}}",
+										"uploads"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41-/jQeGxGTouDEk9XzIbfj4OnB6ko\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:21:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049315822,\n    \"message\": \"Unauthorized access token\"\n}"
+						},
+						{
+							"name": "Unauthorize Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "postman-cloud:///1eecc5da-27d0-4070-99d5-621d7199f8f0"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/posts/{{POST_ID}}/uploads",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										"{{POST_ID}}",
+										"uploads"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "91"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5b-o429+sZUiYacaQTT9P1t0lS7WAY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:23:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049386672,\n    \"message\": \"You did not have permission to access this resource\"\n}"
+						},
+						{
+							"name": "Unauthorize Update",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "postman-cloud:///1f00ac40-657f-41e0-9ee8-4b57f258dd64"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/posts/{{POST_ID}}/uploads",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										"{{POST_ID}}",
+										"uploads"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "72"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"48-N9GfS28Vy2hAecwVusyLuS5O0j0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:30:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049816203,\n    \"message\": \"Unauthorized to update this post\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body as JSON\r",
+									"let responseData = pm.response.json();\r",
+									"\r",
+									"// Check if data[0].id exists before setting the variable\r",
+									"if (responseData.data) {\r",
+									"    let extractedId = responseData.data.id;\r",
+									"    \r",
+									"    // Set the extracted id as a collection variable\r",
+									"    pm.collectionVariables.set(\"POST_ID\", extractedId);\r",
+									"    \r",
+									"    // Log for debugging\r",
+									"    console.log(\"Extracted ID:\", extractedId);\r",
+									"} else {\r",
+									"    console.log(\"ID not found in response.\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"postContent\": \"Sample post content\",\r\n  \"postPrice\": 5000,\r\n  \"bookTitle\": \"Sample Book Title\",\r\n  \"bookAuthor\": \"John Doe\",\r\n  \"bookISBN\": \"978-3-16-148410-0\",\r\n  \"bookLanguage\": \"English\",\r\n  \"bookPublishYear\": \"2022\",\r\n  \"bookPublisher\": \"Sample Publisher\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/posts/{{POST_ID}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"posts",
+								"{{POST_ID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"postContent\": \"Sample post content\",\r\n  \"postPrice\": 5000,\r\n  \"bookTitle\": \"Sample Book Title\",\r\n  \"bookAuthor\": \"John Doe\",\r\n  \"bookISBN\": \"978-3-16-148410-0\",\r\n  \"bookLanguage\": \"English\",\r\n  \"bookPublishYear\": \"2022\",\r\n  \"bookPublisher\": \"Sample Publisher\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/posts/{{POST_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										"{{POST_ID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1933"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"78d-ySxAMiVkDZjzKo6kXQVlaFOU834\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:21:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049267773,\n    \"message\": \"Update post successfully\",\n    \"data\": {\n        \"id\": \"ed894cc2-4592-4c1b-bca1-0f41016395a6\",\n        \"createdAt\": 1743049230228,\n        \"updatedAt\": 1743049239730,\n        \"deletedAt\": null,\n        \"content\": \"Sample post content\",\n        \"price\": 5000,\n        \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/posts/ed894cc2-4592-4c1b-bca1-0f41016395a6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T042038Z&X-Amz-Expires=7200&X-Amz-Signature=3c690a0a7d8f0b89644ba29fd27aed5c166874382a8d5c8ce1d69fe9a5752401&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n        \"userId\": \"d3636a42-5a7d-4c79-8969-fa5908b9f525\",\n        \"user\": {\n            \"id\": \"d3636a42-5a7d-4c79-8969-fa5908b9f525\",\n            \"createdAt\": 1743025700249,\n            \"updatedAt\": 1743025700249,\n            \"deletedAt\": null,\n            \"username\": \"@admin\",\n            \"accountId\": \"ef263a46-02c6-47fa-8cb0-af331a8914cf\",\n            \"profileId\": \"1b47d1ed-41aa-4ee4-b976-26e5b33339b1\",\n            \"profile\": {\n                \"id\": \"1b47d1ed-41aa-4ee4-b976-26e5b33339b1\",\n                \"createdAt\": 1743025700249,\n                \"updatedAt\": 1743025700249,\n                \"deletedAt\": null,\n                \"name\": \"Leslie Blanda\",\n                \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/d3636a42-5a7d-4c79-8969-fa5908b9f525.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T042029Z&X-Amz-Expires=7200&X-Amz-Signature=8004963d9c182a5f76bb8dfc2cdea6706db8060be6ce9121cd20f232d05c58d5&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                \"bio\": \"space junkie  🇧🇬\"\n            }\n        },\n        \"book\": {\n            \"id\": \"ae39dc63-7277-4690-85d5-19d6a4197ed2\",\n            \"createdAt\": 1743049230228,\n            \"updatedAt\": 1743049230228,\n            \"deletedAt\": null,\n            \"title\": \"Sample Book Title\",\n            \"author\": \"John Doe\",\n            \"publisher\": \"Sample Publisher\",\n            \"publishYear\": 1640970000000,\n            \"isbn\": \"978-3-16-148410-0\",\n            \"language\": \"English\",\n            \"postId\": \"ed894cc2-4592-4c1b-bca1-0f41016395a6\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Unauthorize",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"postContent\": \"Sample post content\",\r\n  \"postPrice\": 5000,\r\n  \"bookTitle\": \"Sample Book Title\",\r\n  \"bookAuthor\": \"John Doe\",\r\n  \"bookISBN\": \"978-3-16-148410-0\",\r\n  \"bookLanguage\": \"English\",\r\n  \"bookPublishYear\": \"2022\",\r\n  \"bookPublisher\": \"Sample Publisher\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/posts/{{POST_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										"{{POST_ID}}"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41-/gd6tu2MRH48ff9N9oRn6dKf1nQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:22:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049327656,\n    \"message\": \"Unauthorized access token\"\n}"
+						},
+						{
+							"name": "Unauthorize Account",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"postContent\": \"Sample post content\",\r\n  \"postPrice\": 5000,\r\n  \"bookTitle\": \"Sample Book Title\",\r\n  \"bookAuthor\": \"John Doe\",\r\n  \"bookISBN\": \"978-3-16-148410-0\",\r\n  \"bookLanguage\": \"English\",\r\n  \"bookPublishYear\": \"2022\",\r\n  \"bookPublisher\": \"Sample Publisher\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/posts/{{POST_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										"{{POST_ID}}"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "91"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5b-Pqo6UfA25x6tXvcH4FSYOYImIT4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:23:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049407107,\n    \"message\": \"You did not have permission to access this resource\"\n}"
+						},
+						{
+							"name": "Unauthorize Update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"postContent\": \"Sample post content\",\r\n  \"postPrice\": 5000,\r\n  \"bookTitle\": \"Sample Book Title\",\r\n  \"bookAuthor\": \"John Doe\",\r\n  \"bookISBN\": \"978-3-16-148410-0\",\r\n  \"bookLanguage\": \"English\",\r\n  \"bookPublishYear\": \"2022\",\r\n  \"bookPublisher\": \"Sample Publisher\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/posts/{{POST_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										"{{POST_ID}}"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "72"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"48-ll80Vnt+DYxJsOoQM1yLcfNcrmU\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:29:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049771815,\n    \"message\": \"Unauthorized to update this post\"\n}"
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body as JSON\r",
+									"let responseData = pm.response.json();\r",
+									"\r",
+									"// Check if data[0].id exists before setting the variable\r",
+									"if (responseData.data && responseData.data.length > 0 && responseData.data[0].id) {\r",
+									"    let extractedId = responseData.data[0].id;\r",
+									"    \r",
+									"    // Set the extracted id as a collection variable\r",
+									"    pm.collectionVariables.set(\"USER_ID\", extractedId);\r",
+									"    \r",
+									"    // Log for debugging\r",
+									"    console.log(\"Extracted ID:\", extractedId);\r",
+									"} else {\r",
+									"    console.log(\"ID not found in response.\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/users",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4913"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1331-Srz80fBUMSB61CiM9xgqcycbiqk\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:25:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Retrieve users successfully\",\n    \"timestamp\": 1743049554183,\n    \"pagination\": {\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 6,\n        \"totalPages\": 1\n    },\n    \"data\": [\n        {\n            \"id\": \"44c5c733-ce63-4400-bc78-eff6212c1627\",\n            \"createdAt\": 1743049362946,\n            \"updatedAt\": 1743049362946,\n            \"username\": \"@testuser2\",\n            \"profile\": {\n                \"id\": \"ef7d8b64-a527-4a84-a819-efe3f7837aea\",\n                \"name\": \"Dev Test User\",\n                \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/44c5c733-ce63-4400-bc78-eff6212c1627.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T042554Z&X-Amz-Expires=7200&X-Amz-Signature=111472ac5216f157711efda372fc751a3affc633ca26064b0da1f3654bac6fcd&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                \"bio\": \"Test bio\"\n            },\n            \"account\": {\n                \"id\": \"ea75b3b9-a303-4ae7-94a6-6ac5cdbbf1a3\",\n                \"email\": \"testuser2@lunarlib.com\",\n                \"role\": \"member\",\n                \"isActive\": false\n            }\n        },\n        {\n            \"id\": \"164ee7f2-9639-4fa6-a65c-1e2c128b16e5\",\n            \"createdAt\": 1743049109378,\n            \"updatedAt\": 1743049109378,\n            \"username\": \"@testuser1\",\n            \"profile\": {\n                \"id\": \"63466da0-1da6-4d69-9163-df03886c60c6\",\n                \"name\": \"Dev Test User\",\n                \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/164ee7f2-9639-4fa6-a65c-1e2c128b16e5.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T042554Z&X-Amz-Expires=7200&X-Amz-Signature=4d618569342899d920360ab21117df96e9c03a6e440b75bc4f05bbbd11a96320&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                \"bio\": \"Test bio\"\n            },\n            \"account\": {\n                \"id\": \"d948214b-ee03-4f1a-9fac-956548abcbd3\",\n                \"email\": \"testuser1@lunarlib.com\",\n                \"role\": \"member\",\n                \"isActive\": false\n            }\n        },\n        {\n            \"id\": \"a961c73f-7dce-43b9-9d00-c524944b6e87\",\n            \"createdAt\": 1743025700249,\n            \"updatedAt\": 1743025700249,\n            \"username\": \"@member1\",\n            \"profile\": {\n                \"id\": \"fd4ba42e-0311-49aa-a8a8-31a82ea53496\",\n                \"name\": \"Maurice Lowe-Beatty\",\n                \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/a961c73f-7dce-43b9-9d00-c524944b6e87.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T042554Z&X-Amz-Expires=7200&X-Amz-Signature=14494cd2b4a1ef4e6023c6490ba6f4df2f50df7c8d868215939b9725f6b91c81&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                \"bio\": \"dreamer\"\n            },\n            \"account\": {\n                \"id\": \"b97ad034-c274-4234-999a-798005efb296\",\n                \"email\": \"member1@lunarlib.com\",\n                \"role\": \"member\",\n                \"isActive\": true\n            }\n        },\n        {\n            \"id\": \"07d85431-04c3-4f14-a566-4a09a642d327\",\n            \"createdAt\": 1743025700249,\n            \"updatedAt\": 1743025700249,\n            \"username\": \"@member2\",\n            \"profile\": {\n                \"id\": \"3df31fa2-70e7-433c-b191-d39a6326f718\",\n                \"name\": \"Darren Mraz I\",\n                \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/07d85431-04c3-4f14-a566-4a09a642d327.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T042554Z&X-Amz-Expires=7200&X-Amz-Signature=34dfa118efd6a6a1cb80b21ce61710ffc4d6abec65699188a9ccef0da88f5af2&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                \"bio\": \"film lover, model, musician 💟\"\n            },\n            \"account\": {\n                \"id\": \"2e6e1f53-c0ee-4ffe-b150-259bf6cd880b\",\n                \"email\": \"member2@lunarlib.com\",\n                \"role\": \"member\",\n                \"isActive\": false\n            }\n        },\n        {\n            \"id\": \"1dae44f5-d24a-4f61-8a67-586f5c1353f5\",\n            \"createdAt\": 1743025700249,\n            \"updatedAt\": 1743025700249,\n            \"username\": \"@member3\",\n            \"profile\": {\n                \"id\": \"a6b38455-f1f0-44a9-b41b-93b1d9038a0e\",\n                \"name\": \"Dr. Tim Okuneva\",\n                \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/1dae44f5-d24a-4f61-8a67-586f5c1353f5.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T042554Z&X-Amz-Expires=7200&X-Amz-Signature=a98da188713d5a8472e9242216bc08a9092f6e09117e567a9d4f616bfac76c65&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                \"bio\": \"business owner\"\n            },\n            \"account\": {\n                \"id\": \"92957432-422e-4aa6-a615-301553849511\",\n                \"email\": \"member3@lunarlib.com\",\n                \"role\": \"member\",\n                \"isActive\": false\n            }\n        },\n        {\n            \"id\": \"3e2152ab-93d0-478d-af5f-69795a723569\",\n            \"createdAt\": 1743025700249,\n            \"updatedAt\": 1743025700249,\n            \"username\": \"@member4\",\n            \"profile\": {\n                \"id\": \"6fa9d0f9-eb72-436f-a422-9f8a887ff191\",\n                \"name\": \"Naomi Pfeffer\",\n                \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/3e2152ab-93d0-478d-af5f-69795a723569.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T042554Z&X-Amz-Expires=7200&X-Amz-Signature=4f958fb3a49cc9f1a2ce1d054817dfe22b8f14b327d5bfaca455e065d256f37c&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n                \"bio\": \"inventor\"\n            },\n            \"account\": {\n                \"id\": \"0dc55a03-6855-4270-a6d1-2de52a2f3550\",\n                \"email\": \"member4@lunarlib.com\",\n                \"role\": \"member\",\n                \"isActive\": true\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "Unauthorize Account",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/users",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "91"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5b-Azxd0pThGopJGh8x9LB9RHE/3wg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:24:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049491103,\n    \"message\": \"You did not have permission to access this resource\"\n}"
+						}
+					]
+				},
+				{
+					"name": "User Detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body as JSON\r",
+									"let responseData = pm.response.json();\r",
+									"\r",
+									"// Check if data[0].id exists before setting the variable\r",
+									"if (responseData.data) {\r",
+									"    let extractedId = responseData.data.id;\r",
+									"    \r",
+									"    // Set the extracted id as a collection variable\r",
+									"    pm.collectionVariables.set(\"USER_ID\", extractedId);\r",
+									"    \r",
+									"    // Log for debugging\r",
+									"    console.log(\"Extracted ID:\", extractedId);\r",
+									"} else {\r",
+									"    console.log(\"ID not found in response.\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/{{USER_ID}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"{{USER_ID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/users/{{USER_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"{{USER_ID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1054"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41e-m/L528quQ6a8bx+iH7cle/S1U2A\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:26:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049563282,\n    \"message\": \"Retrieve user successfully\",\n    \"data\": {\n        \"id\": \"44c5c733-ce63-4400-bc78-eff6212c1627\",\n        \"createdAt\": 1743049362946,\n        \"updatedAt\": 1743049362946,\n        \"deletedAt\": null,\n        \"username\": \"@testuser2\",\n        \"accountId\": \"ea75b3b9-a303-4ae7-94a6-6ac5cdbbf1a3\",\n        \"profileId\": \"ef7d8b64-a527-4a84-a819-efe3f7837aea\",\n        \"profile\": {\n            \"id\": \"ef7d8b64-a527-4a84-a819-efe3f7837aea\",\n            \"name\": \"Dev Test User\",\n            \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/44c5c733-ce63-4400-bc78-eff6212c1627.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T042554Z&X-Amz-Expires=7200&X-Amz-Signature=111472ac5216f157711efda372fc751a3affc633ca26064b0da1f3654bac6fcd&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n            \"bio\": \"Test bio\"\n        },\n        \"account\": {\n            \"id\": \"ea75b3b9-a303-4ae7-94a6-6ac5cdbbf1a3\",\n            \"createdAt\": 1743049362946,\n            \"updatedAt\": 1743049362946,\n            \"deletedAt\": null,\n            \"email\": \"testuser2@lunarlib.com\",\n            \"role\": \"member\",\n            \"isActive\": false\n        }\n    }\n}"
+						},
+						{
+							"name": "Unauthorize Account",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/users/{{USER_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"{{USER_ID}}"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "91"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5b-0JPAIFaA4AHoLSa71Wpi9skBf7w\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:25:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049512284,\n    \"message\": \"You did not have permission to access this resource\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update User Active Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body as JSON\r",
+									"let responseData = pm.response.json();\r",
+									"\r",
+									"// Check if data[0].id exists before setting the variable\r",
+									"if (responseData.data) {\r",
+									"    let extractedId = responseData.data.id;\r",
+									"    \r",
+									"    // Set the extracted id as a collection variable\r",
+									"    pm.collectionVariables.set(\"USER_ID\", extractedId);\r",
+									"    \r",
+									"    // Log for debugging\r",
+									"    console.log(\"Extracted ID:\", extractedId);\r",
+									"} else {\r",
+									"    console.log(\"ID not found in response.\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/{{USER_ID}}/active-status",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"{{USER_ID}}",
+								"active-status"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isActive\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/users/{{USER_ID}}/active-status",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"{{USER_ID}}",
+										"active-status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1073"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"431-P74Uziy210QCHuzdI+CjyLumQho\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:26:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049571923,\n    \"message\": \"Update user account active status successfully\",\n    \"data\": {\n        \"id\": \"44c5c733-ce63-4400-bc78-eff6212c1627\",\n        \"createdAt\": 1743049362946,\n        \"updatedAt\": 1743049362946,\n        \"deletedAt\": null,\n        \"username\": \"@testuser2\",\n        \"accountId\": \"ea75b3b9-a303-4ae7-94a6-6ac5cdbbf1a3\",\n        \"profileId\": \"ef7d8b64-a527-4a84-a819-efe3f7837aea\",\n        \"account\": {\n            \"id\": \"ea75b3b9-a303-4ae7-94a6-6ac5cdbbf1a3\",\n            \"createdAt\": 1743049362946,\n            \"updatedAt\": 1743049572781,\n            \"deletedAt\": null,\n            \"email\": \"testuser2@lunarlib.com\",\n            \"role\": \"member\",\n            \"isActive\": true\n        },\n        \"profile\": {\n            \"id\": \"ef7d8b64-a527-4a84-a819-efe3f7837aea\",\n            \"name\": \"Dev Test User\",\n            \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/44c5c733-ce63-4400-bc78-eff6212c1627.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T042554Z&X-Amz-Expires=7200&X-Amz-Signature=111472ac5216f157711efda372fc751a3affc633ca26064b0da1f3654bac6fcd&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n            \"bio\": \"Test bio\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Unauthorize Account",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isActive\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/users/{{USER_ID}}/active-status",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"{{USER_ID}}",
+										"active-status"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "91"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5b-JEV+c+RHNNKaCz9oJ41gyTro/ns\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:25:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049519551,\n    \"message\": \"You did not have permission to access this resource\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/profiles",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/profiles",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"profiles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1052"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41c-nnO1iIMgbXlS8JylMLlUhtzZ/ks\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 04:25:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743049532433,\n    \"message\": \"Get profile successfully\",\n    \"data\": {\n        \"id\": \"44c5c733-ce63-4400-bc78-eff6212c1627\",\n        \"createdAt\": 1743049362946,\n        \"updatedAt\": 1743049362946,\n        \"deletedAt\": null,\n        \"username\": \"@testuser2\",\n        \"accountId\": \"ea75b3b9-a303-4ae7-94a6-6ac5cdbbf1a3\",\n        \"profileId\": \"ef7d8b64-a527-4a84-a819-efe3f7837aea\",\n        \"profile\": {\n            \"id\": \"ef7d8b64-a527-4a84-a819-efe3f7837aea\",\n            \"createdAt\": 1743049362946,\n            \"updatedAt\": 1743049364198,\n            \"deletedAt\": null,\n            \"name\": \"Dev Test User\",\n            \"image\": \"https://minio-s3.okifirsy.my.id/lunarlib-dev/users/44c5c733-ce63-4400-bc78-eff6212c1627.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d4f2NNG2opEdlp85znnO%2F20250327%2Fidn-home-lab%2Fs3%2Faws4_request&X-Amz-Date=20250327T042420Z&X-Amz-Expires=7200&X-Amz-Signature=7db56004cb154339c3d1411628f831d6f53482ab4152e0635f440c35a90a78f0&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\n            \"bio\": \"Test bio\"\n        },\n        \"account\": {\n            \"id\": \"ea75b3b9-a303-4ae7-94a6-6ac5cdbbf1a3\",\n            \"email\": \"testuser2@lunarlib.com\",\n            \"role\": \"member\",\n            \"isActive\": false\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{ACCESS_TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "POST_ID",
+			"value": ""
+		},
+		{
+			"key": "ACCESS_TOKEN",
+			"value": ""
+		},
+		{
+			"key": "GROUP_ID",
+			"value": ""
+		},
+		{
+			"key": "USER_ID",
+			"value": ""
+		}
+	]
+}

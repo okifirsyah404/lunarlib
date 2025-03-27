@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  cache-redis:
+    image: redis:7.4.1-alpine3.20
+    env_file:
+      - .env
+    command: redis-server
+    networks:
+      - lunarlib-be
+    volumes:
+      - cache-data:/data
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 100M
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - ${APP_PORT:?}:${APP_PORT:?}
+    depends_on:
+      - cache-redis
+    networks:
+      - lunarlib-be
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '1'
+          memory: 500M
+
+volumes:
+  cache-data:
+
+networks:
+  lunarlib-be:
+    driver: bridge

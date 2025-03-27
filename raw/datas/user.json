@@ -1,0 +1,24 @@
+{
+    "data": [
+        {
+            "email": "admin@lunarlib.com",
+            "username": "@admin"
+        },
+        {
+            "email": "member1@lunarlib.com",
+            "username": "@member1"
+        },
+        {
+            "email": "member2@lunarlib.com",
+            "username": "@member2"
+        },
+        {
+            "email": "member3@lunarlib.com",
+            "username": "@member3"
+        },
+        {
+            "email": "member4@lunarlib.com",
+            "username": "@member4"
+        }
+    ]
+}
