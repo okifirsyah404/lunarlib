@@ -884,7 +884,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"postContent\": \"Sample post content\",\r\n  \"postPrice\": 5000,\r\n  \"bookTitle\": \"Sample Book Title\",\r\n  \"bookAuthor\": \"John Doe\",\r\n  \"bookISBN\": \"978-3-16-148410-0\",\r\n  \"bookLanguage\": \"English\",\r\n  \"bookPublishYear\": \"2022\",\r\n  \"bookPublisher\": \"Sample Publisher\"\r\n}",
+							"raw": "{\r\n  \"postContent\": \"Sample post content 1\",\r\n  \"postPrice\": 5000,\r\n  \"bookTitle\": \"Sample Book Title\",\r\n  \"bookAuthor\": \"John Doe\",\r\n  \"bookISBN\": \"978-3-16-148410-0\",\r\n  \"bookLanguage\": \"English\",\r\n  \"bookPublishYear\": \"2022\",\r\n  \"bookPublisher\": \"Sample Publisher\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1121,7 +1121,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "postman-cloud:///1eecc5da-27d0-4070-99d5-621d7199f8f0"
+									"src": "postman-cloud:///1f00ac40-657f-41e0-9ee8-4b57f258dd64"
 								}
 							]
 						},
@@ -1750,6 +1750,129 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"timestamp\": 1743049771815,\n    \"message\": \"Unauthorized to update this post\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/posts/{{POST_ID}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"posts",
+								"{{POST_ID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/posts/{{POST_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										"{{POST_ID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"40-Yn+F16GzEQouQL5cDF0pmrngP7o\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 05:33:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743053587302,\n    \"message\": \"Delete post successfully\"\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/posts/{{POST_ID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"posts",
+										"{{POST_ID}}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "54"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"36-jAUSK4xbUQtHiIchsOmRDLvuEhE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Mar 2025 05:34:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": 1743053698062,\n    \"message\": \"Post not found\"\n}"
 						}
 					]
 				}
