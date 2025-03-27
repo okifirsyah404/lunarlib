@@ -14,7 +14,7 @@ export class ProfileService {
 	private readonly logger = new Logger(ProfileService.name);
 
 	@SetCache<IUserResponse>((userId: string) => `user-profile:${userId}`, {
-		ttl: 5,
+		ttl: 1,
 		unit: 'minutes',
 	})
 	async getUserById(id: string): Promise<IUserResponse> {

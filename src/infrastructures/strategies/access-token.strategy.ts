@@ -25,7 +25,7 @@ export class AccessTokenStrategy extends PassportStrategy(Strategy) {
 	}
 
 	@SetCache((userId: string) => `user-strategy:${userId}`, {
-		ttl: 60,
+		ttl: 1,
 		unit: 'minutes',
 	})
 	private async _validateUser(userId: string): Promise<IUserEntity> {
