@@ -34,6 +34,10 @@ This pattern is used in authentication strategies using passport, making it easy
 
 Postman collection can be downloaded from [here](/.postman/lunarlib.postman_collection.json) and its env from [here](/.postman/lunarlib_env.postman_environment.json).
 
+## 📖 Documentation
+
+Demo endpoint can be accessed in [here](https://dothiringtest.okifirsyah.my.id/).
+
 ## 🚀 Setup
 
 Install required dependency
