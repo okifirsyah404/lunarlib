@@ -186,4 +186,20 @@ export class PostService {
 
 		return formattedPost;
 	}
+
+	async deletePost(postId: string, userId: string): Promise<void> {
+		const post = await this.repository.getPostById(postId);
+
+		if (!post) {
+			throw new NotFoundException('Post not found');
+		}
+
+		if (post.userId !== userId) {
+			throw new UnprocessableEntityException(
+				'Unauthorized to delete this post',
+			);
+		}
+
+		await this.repository.deletePost(postId);
+	}
 }

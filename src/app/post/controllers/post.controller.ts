@@ -10,6 +10,7 @@ import { IPostResponse } from '@contract/responses/post.response.interface';
 import {
 	Body,
 	Controller,
+	Delete,
 	Get,
 	Param,
 	Post,
@@ -119,6 +120,21 @@ export class PostController {
 		return ApiResponse.success({
 			message: 'Update post successfully',
 			data: result,
+		});
+	}
+
+	@UseGuards(RoleGuard)
+	@Roles(RoleEnum.ADMIN, RoleEnum.MEMBER)
+	@Delete(':postId')
+	async deletePost(
+		@GetUserLogged() user: IUserEntity,
+		@Param('postId') postId: string,
+	): Promise<IApiResponse<undefined>> {
+		await this.service.deletePost(postId, user.id!);
+
+		return ApiResponse.success({
+			message: 'Delete post successfully',
+			data: undefined,
 		});
 	}
 }

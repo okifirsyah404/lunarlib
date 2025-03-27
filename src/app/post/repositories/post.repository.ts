@@ -230,8 +230,8 @@ export class PostRepository extends Repository<PostEntity> {
 		await queryRunner.startTransaction();
 
 		try {
-			await queryRunner.manager.delete(PostEntity, { id: postId });
-			await queryRunner.manager.delete(BookEntity, { postId: postId });
+			await queryRunner.manager.softDelete(BookEntity, { postId: postId });
+			await queryRunner.manager.softDelete(PostEntity, { id: postId });
 			await queryRunner.commitTransaction();
 		} catch (error) {
 			await queryRunner.rollbackTransaction();
