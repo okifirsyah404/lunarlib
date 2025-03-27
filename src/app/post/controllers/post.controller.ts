@@ -22,7 +22,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import path from 'path';
+import * as path from 'path';
 import { GetUserLogged } from 'src/infrastructures/decorators/get-user-logged.decorator';
 import { Roles } from 'src/infrastructures/decorators/role.decorator';
 import { AccessTokenGuard } from 'src/infrastructures/guards/access-token.guard';

@@ -70,7 +70,20 @@ export class AuthService {
 			throw new NotFoundException('Account already exists');
 		}
 
-		const account = await this.accountRepository.createAccount(reqData);
+		const hashPassword = await CryptoUtil.hash(
+			reqData.password,
+			this.config.bcryptConfig.saltRounds,
+		);
+
+		this.logger.log('hash password', hashPassword);
+
+		const account = await this.accountRepository.createAccount({
+			email: reqData.email,
+			password: hashPassword,
+			username: reqData.username,
+			name: reqData.name,
+			bio: reqData.bio,
+		});
 
 		if (!account) {
 			throw new NotFoundException('Account creation failed');

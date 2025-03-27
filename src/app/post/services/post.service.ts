@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { FileUtil } from '@util/file.util';
 import {
+	ClearCache,
 	RefreshCache,
 	SetCache,
 } from 'src/infrastructures/decorators/app-cache.decorator';
@@ -187,6 +188,7 @@ export class PostService {
 		return formattedPost;
 	}
 
+	@ClearCache((postId: string) => `post:${postId}`)
 	async deletePost(postId: string, userId: string): Promise<void> {
 		const post = await this.repository.getPostById(postId);
 
@@ -199,7 +201,5 @@ export class PostService {
 				'Unauthorized to delete this post',
 			);
 		}
-
-		await this.repository.deletePost(postId);
 	}
 }
